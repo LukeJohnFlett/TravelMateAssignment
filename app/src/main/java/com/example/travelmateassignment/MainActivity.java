@@ -1,9 +1,13 @@
 package com.example.travelmateassignment;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ViewFlipper;
 
 import com.example.travelmateassignment.ui.createPost.CreatePostFragment;
+import com.example.travelmateassignment.ui.dashboard.DashboardViewModel;
+import com.example.travelmateassignment.ui.dashboard.Post;
 import com.example.travelmateassignment.ui.home.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -15,7 +19,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
-
+ private CreatePostFragment post;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +40,11 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
 
 
+
+
+
     }
 
 
-}
+    }
+

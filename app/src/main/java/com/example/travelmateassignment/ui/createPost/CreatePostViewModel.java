@@ -14,8 +14,7 @@ public class CreatePostViewModel extends ViewModel {
 
 
     public CreatePostViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("Create Post");
+
     }
 
     public LiveData<String> getText() {

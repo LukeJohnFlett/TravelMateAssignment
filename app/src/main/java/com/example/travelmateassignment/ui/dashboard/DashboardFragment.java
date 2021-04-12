@@ -15,14 +15,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.travelmateassignment.R;
+import com.example.travelmateassignment.ui.createPost.CreatePostFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DashboardFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
     private RecyclerView recyclerView;
     private PostAdapter postAdapter;
+    private CreatePostFragment postFragment;
+    private TextView textName;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -32,13 +36,25 @@ public class DashboardFragment extends Fragment {
         recyclerView = root.findViewById(R.id.rv);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        textName = root.findViewById(R.id.name);
 
 
-        ArrayList<Post> posts = new ArrayList<>();
-        posts.add(new Post("Denmark", "Luke", "I am 12"));
-        posts.add(new Post("Spain", "Capper", "I am a kid and not very fun and not very cool. but i am chill"));
-        postAdapter = new PostAdapter(posts, this);
-        recyclerView.setAdapter(postAdapter);
+
+        dashboardViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
+        dashboardViewModel.getAllPosts().observe(getViewLifecycleOwner(),posts -> {
+            if(!posts.isEmpty()){
+                textName.setText("");
+                for(Post p : posts){
+                    textName.append(p.getName());
+                }
+            }
+            else{
+                textName.setText("Empty");
+            }
+        });
+
+
+
 
         return root;
     }

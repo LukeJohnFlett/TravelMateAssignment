@@ -16,6 +16,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     List<Post> posts;
 
+
     public PostAdapter(List<Post> posts, DashboardFragment dashboardFragment){
         this.posts=posts;
     }
@@ -28,6 +29,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.list_posts, parent, false);
         return new ViewHolder(view);
+        
     }
 
     @Override
@@ -35,6 +37,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.country.setText(posts.get(position).getCountry());
         holder.name.setText(posts.get(position).getName());
         holder.decription.setText(posts.get(position).getDecription());
+
     }
 
     @Override
