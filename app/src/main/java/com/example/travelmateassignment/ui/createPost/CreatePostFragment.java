@@ -52,7 +52,9 @@ public class CreatePostFragment extends Fragment {
         });
             return root;
     }
-
+    //public void savePost(View v) {
+      //  dashBoardViewModel.insert(new Post(editName.getText().toString(),editCountry.getText().toString(),editCountry.getText().toString(),1));
+    //}
 
 
 }
