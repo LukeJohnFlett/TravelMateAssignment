@@ -1,41 +1,41 @@
 package com.example.travelmateassignment.ui.dashboard;
 
-import android.annotation.SuppressLint;
-import android.media.Image;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.travelmateassignment.Data.Post;
+import com.example.travelmateassignment.Data.PostAdapter;
 import com.example.travelmateassignment.R;
 import com.example.travelmateassignment.ui.createPost.CreatePostFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DashboardFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
     private RecyclerView recyclerView;
-    private PostAdapter postAdapter;
+    public PostAdapter postAdapter;
     private CreatePostFragment postFragment;
     private TextView textName;
     private TextView textCountry;
     private TextView textDecription;
+    private EditText editText;
+    ArrayList<Post> posts;
+
+
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -49,43 +49,48 @@ public class DashboardFragment extends Fragment {
         textName = root.findViewById(R.id.name);
         textCountry = root.findViewById(R.id.country);
         textDecription = root.findViewById(R.id.decription);
+        editText = root.findViewById(R.id.searchEdit);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+
+            }
+        });
 
 
 
-
-
-
-        ArrayList<Post> postss = new ArrayList<>();
-        postAdapter = new PostAdapter(postss, this);
+        posts = new ArrayList<>();
+        postAdapter = new PostAdapter(posts, this);
         recyclerView.setAdapter(postAdapter);
 
 
+
         dashboardViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
-        dashboardViewModel.getAllPosts().observe(getViewLifecycleOwner(),posts -> {
-           postAdapter.updatePost(posts);
+        dashboardViewModel.getAllPosts().observe(getViewLifecycleOwner(), posts -> {
+            postAdapter.updatePost(posts);
 
         });
 
         return root;
     }
-    public boolean onCreateOptionsMenu(Menu menu){
-
-        MenuItem searchItem = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
+    private void filter(String text){
+        ArrayList<Post> filteredList = new ArrayList<>();
+        for(Post post: posts){
+            if(post.getCountry().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(post);
             }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                postAdapter.getFilter().filter(newText);
-
-                return false;
-            }
-        });
-        return true;
+        }
+        postAdapter.filterList(filteredList);
     }
 }

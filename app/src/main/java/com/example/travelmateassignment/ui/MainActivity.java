@@ -1,4 +1,4 @@
-package com.example.travelmateassignment.Data;
+package com.example.travelmateassignment.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
@@ -18,12 +17,14 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.travelmateassignment.R;
 import com.example.travelmateassignment.ui.createPost.CreatePostFragment;
+import com.example.travelmateassignment.ui.dashboard.DashboardFragment;
 import com.example.travelmateassignment.ui.home.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
  private CreatePostFragment post;
+ private DashboardFragment dashboard;
  private MainActivityViewModel viewModel;
  Toolbar toolbar;
 
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.constraint,new HomeFragment());
         transaction.commit();
+
 
     }
 

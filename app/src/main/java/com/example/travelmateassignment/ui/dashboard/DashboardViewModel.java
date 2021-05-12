@@ -4,8 +4,9 @@ import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+
+import com.example.travelmateassignment.Data.Post;
+import com.example.travelmateassignment.Data.PostRepository;
 
 import java.util.List;
 

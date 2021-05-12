@@ -1,10 +1,8 @@
-package com.example.travelmateassignment.ui.dashboard;
+package com.example.travelmateassignment.Data;
 
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
-import androidx.room.Dao;
-import androidx.room.Database;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;

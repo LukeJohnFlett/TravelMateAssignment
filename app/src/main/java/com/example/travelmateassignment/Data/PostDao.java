@@ -1,4 +1,4 @@
-package com.example.travelmateassignment.ui.dashboard;
+package com.example.travelmateassignment.Data;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

@@ -1,4 +1,4 @@
-package com.example.travelmateassignment.ui.dashboard;
+package com.example.travelmateassignment.Data;
 
 import android.content.Context;
 

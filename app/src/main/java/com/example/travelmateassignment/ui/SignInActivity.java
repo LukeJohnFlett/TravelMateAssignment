@@ -1,4 +1,4 @@
-package com.example.travelmateassignment.Data;
+package com.example.travelmateassignment.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
