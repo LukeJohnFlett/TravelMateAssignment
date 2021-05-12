@@ -16,15 +16,15 @@ import com.example.travelmateassignment.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> implements Filterable {
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     List<Post> posts;
-    private List<Post> postsFull;
+
 
 
     public PostAdapter(List<Post> posts, DashboardFragment dashboardFragment){
         this.posts=posts;
-        postsFull = new ArrayList<>(posts);
+
     }
 
 
@@ -72,39 +72,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> im
         }
 
     }
-    @Override
-    public Filter getFilter() {
-        return postFilter;
+    public void filterList(ArrayList<Post> filteredList){
+        posts = filteredList;
+        notifyDataSetChanged();
     }
 
-    private Filter postFilter = new Filter(){
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint){
-            List<Post> filteredList = new ArrayList<>();
-
-            if(constraint == null || constraint.length() == 0){
-                filteredList.addAll(postsFull);
-            }
-            else{
-                String filterPattern = constraint.toString().toLowerCase().trim();
-
-                for (Post post : postsFull){
-                    if(post.getCountry().toLowerCase().contains(filterPattern)){
-                        filteredList.add(post);
-                    }
-                }
-            }
-            FilterResults results = new FilterResults();
-            results.values = filteredList;
-            return results;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            posts.clear();
-            posts.addAll((List) results.values);
-            notifyDataSetChanged();
-
-        }
-    };
 }
