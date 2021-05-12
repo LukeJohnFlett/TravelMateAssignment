@@ -13,7 +13,7 @@ public abstract class PostDatabase extends RoomDatabase {
 
     public static synchronized PostDatabase getInstance(Context context){
         if(instance == null) {
-            instance = Room.databaseBuilder(context.getApplicationContext(),
+            instance = Room.databaseBuilder(context,
                     PostDatabase.class, "post_database")
                     .fallbackToDestructiveMigration()
                     .build();

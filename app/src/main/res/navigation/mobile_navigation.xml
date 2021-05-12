@@ -22,4 +22,6 @@
         android:name="com.example.travelmateassignment.ui.createPost.CreatePostFragment"
         android:label="@string/title_create_post"
         tools:layout="@layout/fragment_create_post" />
+
+
 </navigation>

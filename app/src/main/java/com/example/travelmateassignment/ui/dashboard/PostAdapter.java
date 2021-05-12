@@ -3,6 +3,9 @@ package com.example.travelmateassignment.ui.dashboard;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,15 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.travelmateassignment.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> implements Filterable {
 
     List<Post> posts;
+    private List<Post> postsFull;
 
 
     public PostAdapter(List<Post> posts, DashboardFragment dashboardFragment){
         this.posts=posts;
+        postsFull = new ArrayList<>(posts);
     }
 
 
@@ -45,6 +51,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return posts.size();
     }
 
+    public void updatePost(List<Post> posts) {
+        this.posts=posts;
+        notifyDataSetChanged();
+    }
+
+
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView country;
@@ -59,4 +72,39 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         }
 
     }
+    @Override
+    public Filter getFilter() {
+        return postFilter;
+    }
+
+    private Filter postFilter = new Filter(){
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint){
+            List<Post> filteredList = new ArrayList<>();
+
+            if(constraint == null || constraint.length() == 0){
+                filteredList.addAll(postsFull);
+            }
+            else{
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (Post post : postsFull){
+                    if(post.getCountry().toLowerCase().contains(filterPattern)){
+                        filteredList.add(post);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            posts.clear();
+            posts.addAll((List) results.values);
+            notifyDataSetChanged();
+
+        }
+    };
 }

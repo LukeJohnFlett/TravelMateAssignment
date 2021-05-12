@@ -1,6 +1,5 @@
 package com.example.travelmateassignment.ui.home;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,22 +12,18 @@ import android.widget.ViewFlipper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.example.travelmateassignment.MainActivity;
 import com.example.travelmateassignment.R;
-import com.example.travelmateassignment.ui.createPost.CreatePostFragment;
-import com.example.travelmateassignment.ui.dashboard.DashboardFragment;
 
-import static com.example.travelmateassignment.R.id.navigation_home;
+import static com.example.travelmateassignment.R.id.navigation_create_post;
 
 public class HomeFragment extends Fragment {
 
     ViewFlipper flipper;
+    View text1;
 
 
     private HomeViewModel homeViewModel;
@@ -46,21 +41,31 @@ public class HomeFragment extends Fragment {
         for (int i = 0; i<images.length; i++){
             flipperImages(images[i]);
         }
-//****************************************
+
         Button buttonFind = (Button) root.findViewById(R.id.buttonFind);
 
         buttonFind.setOnClickListener(v -> {
-                FragmentTransaction fr = getChildFragmentManager().beginTransaction();
-                fr.replace(R.id.fl, new CreatePostFragment());
-                fr.addToBackStack(null);
-                fr.commit();
-                
-
+                Navigation.findNavController(root).navigate(navigation_create_post);
 
             });
-//****************************************
+        final TextView textView1 = root.findViewById(R.id.hometext1);
+        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                textView1.setText(s);
+            }
 
+        });
+        final TextView textView2 = root.findViewById(R.id.hometext2);
+        homeViewModel.getText1().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                textView2.setText(s);
+            }
+
+        });
         return root;
+
 
     }
     public void flipperImages (int image){

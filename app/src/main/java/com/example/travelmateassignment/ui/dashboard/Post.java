@@ -3,6 +3,8 @@ package com.example.travelmateassignment.ui.dashboard;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.example.travelmateassignment.R;
+
 @Entity(tableName = "post_table")
 public class Post {
     @PrimaryKey(autoGenerate = true)
@@ -13,7 +15,7 @@ public class Post {
     private int priority;
 
 
-    public Post(String country, String name, String decription,int priority) {
+    public Post(String country, String name, String decription, int priority) {
         this.id = id;
         this.country = country;
         this.name = name;
@@ -63,5 +65,6 @@ public class Post {
     public String getDecription() {
         return decription;
     }
+
 
 }
