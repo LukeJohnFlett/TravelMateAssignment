@@ -15,11 +15,13 @@ Must have:
 Should have:
 
 • Some search filters.
+
 • A profile
 
 Could have:
 
 • a map with all the destinations
+
 • A way to communicate with each other.
 
 should have:
