@@ -25,6 +25,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     }
 
+    public List<Post> getPosts(){
+        return posts;
+    }
+
+
 
 
     @NonNull
@@ -53,6 +58,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         this.posts=posts;
         notifyDataSetChanged();
     }
+
 
 
 

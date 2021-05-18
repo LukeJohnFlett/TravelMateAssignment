@@ -5,6 +5,8 @@ import androidx.room.PrimaryKey;
 
 import com.example.travelmateassignment.R;
 
+import java.util.List;
+
 @Entity(tableName = "post_table")
 public class Post {
     @PrimaryKey(autoGenerate = true)
@@ -13,6 +15,7 @@ public class Post {
     private String name;
     private String decription;
     private int priority;
+
 
 
     public Post(String country, String name, String decription, int priority) {
@@ -65,6 +68,8 @@ public class Post {
     public String getDecription() {
         return decription;
     }
+
+
 
 
 }

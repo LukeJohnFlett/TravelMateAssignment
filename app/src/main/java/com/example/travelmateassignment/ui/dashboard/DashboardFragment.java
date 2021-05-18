@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Database;
 
 import com.example.travelmateassignment.Data.Post;
 import com.example.travelmateassignment.Data.PostAdapter;
@@ -21,6 +23,7 @@ import com.example.travelmateassignment.R;
 import com.example.travelmateassignment.ui.createPost.CreatePostFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DashboardFragment extends Fragment {
 
@@ -32,7 +35,10 @@ public class DashboardFragment extends Fragment {
     private TextView textCountry;
     private TextView textDecription;
     private EditText editText;
-    ArrayList<Post> posts;
+    List<Post> posts;
+    List<Post> posts1;
+    private boolean initiated = false;
+
 
 
 
@@ -63,10 +69,18 @@ public class DashboardFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                filter(s.toString());
+                if(s.toString().equals("")){
+                    postAdapter.updatePost(posts);
+
+                }
+                else{
+                    filter(s.toString());
+                }
+
 
             }
         });
+
 
 
 
@@ -84,10 +98,17 @@ public class DashboardFragment extends Fragment {
 
         return root;
     }
+
+
     private void filter(String text){
+    if(!initiated){
+        posts = postAdapter.getPosts();
+        initiated=true;
+    }
+        posts1 = posts;
         ArrayList<Post> filteredList = new ArrayList<>();
-        for(Post post: posts){
-            if(post.getCountry().toLowerCase().contains(text.toLowerCase())){
+        for(Post post: posts1) {
+            if (post.getName().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(post);
             }
         }
