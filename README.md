@@ -9,17 +9,20 @@ Must have:
 
 • A create post.
 
-• A profile/login
+• A login
+
 
 Should have:
 
 • Some search filters.
 
-• A way to communicate with each other.
+• A profile
 
 Could have:
 
 • a map with all the destinations
+
+• A way to communicate with each other.
 
 should have:
 
