@@ -20,14 +20,15 @@ Should have:
 
 • Some search filters.
 
-• A profile
 
 Could have:
 
 • a map with all the destinations
 
-• A way to communicate with each other.
+• A profile
 
-should have:
+would have:
 
 • a nearby list, where you can see on a map who is nearby with the app.
+
+• A way to communicate with each other.
